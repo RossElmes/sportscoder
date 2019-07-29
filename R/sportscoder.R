@@ -28,12 +28,14 @@ read_sportscode_xml <- function(xml_file_path) {
     instance_end <- xml_child(instance, 'end') %>% xml_text() %>% as.numeric()
     instance_code <- xml_child(instance, 'code') %>% xml_text()
 
+
     # A data frame representing just this instance (will only have a single row)
     instance_df <- data_frame(id = instance_id,
                               code = instance_code,
                               start =instance_start,
                               end = instance_end,
-                              other = NA)
+                              other = NA,
+                              file_path = xml_file_path)
 
     labels_with_a_group_nodes <- instance %>% xml_find_all("label[group]")
 
